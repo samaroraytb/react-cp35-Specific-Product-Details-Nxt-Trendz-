@@ -72,6 +72,17 @@ class ProductItemDetails extends Component {
     }
   }
 
+  onDecrementQuantity = () => {
+    const {quantity} = this.state
+    if (quantity > 1) {
+      this.setState(prevState => ({quantity: prevState.quantity - 1}))
+    }
+  }
+
+  onIncrementQuantity = () => {
+    this.setState(prevState => ({quantity: prevState.quantity + 1}))
+  }
+
   renderSuccessProductDetail = () => {
     const {productData, quantity, similarProductsData} = this.state
     const {
@@ -117,6 +128,7 @@ class ProductItemDetails extends Component {
                 type="button"
                 className="quantity-controller-button"
                 onClick={this.onDecrementQuantity}
+                data-testid="minus"
               >
                 <BsDashSquare className="quantity-controller-icon" />
               </button>
@@ -125,6 +137,7 @@ class ProductItemDetails extends Component {
                 type="button"
                 className="quantity-controller-button"
                 onClick={this.onIncrementQuantity}
+                data-testid="plus"
               >
                 <BsPlusSquare className="quantity-controller-icon" />
               </button>
@@ -148,7 +161,7 @@ class ProductItemDetails extends Component {
   }
 
   renderingLoader = () => (
-    <div>
+    <div data-testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
@@ -156,7 +169,7 @@ class ProductItemDetails extends Component {
   renderFetchingFailed = () => (
     <div className="product-details-error-view-container">
       <img
-        alt="error view"
+        alt="failure view"
         src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-error-view-img.png"
         className="error-view-image"
       />
